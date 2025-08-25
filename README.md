@@ -1,7 +1,8 @@
 # @aragaoi/context-storage
 
-
 [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/seachegue/context-storage) [![Version](https://img.shields.io/npm/v/@aragaoi/context-storage.svg)](https://www.npmjs.com/package/@aragaoi/context-storage)
+
+> **Documentation**: This package is a wrapper around Node.js [AsyncLocalStorage](https://nodejs.org/download/release/v18.17.1/docs/api/async_context.html). For a detailed explanation of how AsyncLocalStorage works, see our [AsyncLocalStorage Guide](./ASYNC_STORAGE_GUIDE.md).
 - 🔒 **Type-safe**: Full TypeScript support with generics
 - 🚀 **Zero dependencies**: Only uses Node.js built-ins
 - 🧹 **Automatic cleanup**: Context is automatically cleaned up after async operations
