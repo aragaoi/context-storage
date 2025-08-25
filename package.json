@@ -19,7 +19,7 @@
     "typescript",
     "nodejs"
   ],
-  "author": "Seachegue",
+  "author": "aragaoi",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^30.0.0",
