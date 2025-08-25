@@ -1,5 +1,6 @@
 # Context Storage
 
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/seachegue/context-storage)
 A lightweight, type-safe AsyncLocalStorage wrapper for managing context in Node.js applications.
 
 ## Features
