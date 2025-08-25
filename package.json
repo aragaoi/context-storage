@@ -1,5 +1,5 @@
 {
-  "name": "context-storage",
+  "name": "@aragaoi/context-storage",
   "version": "1.0.0",
   "description": "Generic AsyncLocalStorage wrapper for context management",
   "main": "dist/index.js",

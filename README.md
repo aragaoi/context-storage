@@ -1,7 +1,7 @@
-# Context Storage
+# @aragaoi/context-storage
 
 
-[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/seachegue/context-storage) [![Version](https://img.shields.io/npm/v/context-storage.svg)](https://www.npmjs.com/package/context-storage)
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/seachegue/context-storage) [![Version](https://img.shields.io/npm/v/@aragaoi/context-storage.svg)](https://www.npmjs.com/package/@aragaoi/context-storage)
 - 🔒 **Type-safe**: Full TypeScript support with generics
 - 🚀 **Zero dependencies**: Only uses Node.js built-ins
 - 🧹 **Automatic cleanup**: Context is automatically cleaned up after async operations
