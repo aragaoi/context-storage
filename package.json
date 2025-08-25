@@ -3,6 +3,8 @@
   "version": "1.0.1",
   "description": "Generic AsyncLocalStorage wrapper for context management",
   "main": "dist/index.js",
+  "module": "dist/index.js",
+  "type": "module",
   "types": "dist/index.d.ts",
   "files": [
     "dist"

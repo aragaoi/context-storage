@@ -2,8 +2,8 @@ import {
   ContextStorage,
   createRequestContext,
   requestContextStorage,
-  contextStorage
-} from "../index";
+  contextStorage,
+} from "../index.js";
 
 describe("Index exports", () => {
   it("should export ContextStorage class", () => {

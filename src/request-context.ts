@@ -1,5 +1,5 @@
 import {randomUUID} from 'crypto';
-import {ContextStorage} from './context-storage';
+import { ContextStorage } from "./context-storage.js";
 
 export type UUID = string;
 

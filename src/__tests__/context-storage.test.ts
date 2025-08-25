@@ -1,4 +1,4 @@
-import { ContextStorage } from "../context-storage";
+import { ContextStorage } from "../context-storage.js";
 
 interface TestContext {
   id: string;
@@ -14,7 +14,7 @@ describe("ContextStorage", () => {
     contextFactory = () => ({
       id: "test-id",
       name: "test-name",
-      count: 0
+      count: 0,
     });
     storage = new ContextStorage(contextFactory, "TestContext");
   });
@@ -38,7 +38,7 @@ describe("ContextStorage", () => {
         expect(context).toEqual({
           id: "test-id",
           name: "test-name",
-          count: 0
+          count: 0,
         });
         return "test-result";
       });
@@ -52,7 +52,7 @@ describe("ContextStorage", () => {
         expect(context).toEqual({
           id: "test-id",
           name: "test-name",
-          count: 0
+          count: 0,
         });
         return "async-result";
       });
@@ -91,7 +91,7 @@ describe("ContextStorage", () => {
         expect(context).toEqual({
           id: "test-id",
           name: "test-name",
-          count: 0
+          count: 0,
         });
       });
     });
@@ -101,7 +101,9 @@ describe("ContextStorage", () => {
     it("should throw error when no context is set", () => {
       expect(() => {
         storage.getContextOrThrow();
-      }).toThrow("TestContext not found. This usually means the context middleware was not properly applied.");
+      }).toThrow(
+        "TestContext not found. This usually means the context middleware was not properly applied."
+      );
     });
 
     it("should return context when inside runWithContext", () => {
@@ -110,7 +112,7 @@ describe("ContextStorage", () => {
         expect(context).toEqual({
           id: "test-id",
           name: "test-name",
-          count: 0
+          count: 0,
         });
       });
     });
@@ -130,7 +132,7 @@ describe("ContextStorage", () => {
         expect(context).toEqual({
           id: "test-id",
           name: "updated-name",
-          count: 5
+          count: 5,
         });
       });
     });
@@ -142,7 +144,7 @@ describe("ContextStorage", () => {
         expect(context).toEqual({
           id: "test-id",
           name: "test-name",
-          count: 10
+          count: 10,
         });
       });
     });
