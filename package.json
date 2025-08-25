@@ -13,6 +13,9 @@
     "test": "jest",
     "prepublishOnly": "npm run build"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "async-local-storage",
     "context",
