@@ -1,9 +1,16 @@
 name: Publish to NPM
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Type of release (patch, minor, major)'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
   publish:
@@ -11,6 +18,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Use Node.js
       uses: actions/setup-node@v4
@@ -22,11 +31,33 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Update package.json version
+      run: npm version ${{ github.event.inputs.release_type }} --no-git-tag-version
+
     - name: Build
       run: npm run build
 
     - name: Run tests
       run: npm test
+
+    - name: Get new version
+      id: get_version
+      run: echo "new_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+    - name: Commit version changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add package.json package-lock.json
+        git commit -m "chore: bump version to ${{ steps.get_version.outputs.new_version }}"
+
+    - name: Create and push tag
+      run: |
+        git tag v${{ steps.get_version.outputs.new_version }}
+        git push origin v${{ steps.get_version.outputs.new_version }}
+
+    - name: Push version changes
+      run: git push
 
     - name: Publish to NPM
       run: npm publish
