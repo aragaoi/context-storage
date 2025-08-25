@@ -1,10 +1,7 @@
 # Context Storage
 
-[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/seachegue/context-storage)
-A lightweight, type-safe AsyncLocalStorage wrapper for managing context in Node.js applications.
 
-## Features
-
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/seachegue/context-storage) [![Version](https://img.shields.io/npm/v/context-storage.svg)](https://www.npmjs.com/package/context-storage)
 - 🔒 **Type-safe**: Full TypeScript support with generics
 - 🚀 **Zero dependencies**: Only uses Node.js built-ins
 - 🧹 **Automatic cleanup**: Context is automatically cleaned up after async operations
