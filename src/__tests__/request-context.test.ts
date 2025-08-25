@@ -2,8 +2,8 @@ import {
   createRequestContext,
   requestContextStorage,
   contextStorage,
-} from "../request-context.js";
-import type { RequestContext } from "../request-context.js";
+} from "../request-context";
+import type { RequestContext } from "../request-context";
 
 describe("RequestContext", () => {
   describe("createRequestContext", () => {

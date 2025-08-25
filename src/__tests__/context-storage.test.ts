@@ -1,4 +1,4 @@
-import { ContextStorage } from "../context-storage.js";
+import { ContextStorage } from "../context-storage";
 
 interface TestContext {
   id: string;
