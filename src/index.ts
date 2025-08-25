@@ -1,7 +1,7 @@
-export { ContextStorage } from './context-storage';
+export { ContextStorage } from "./context-storage";
+export type { RequestContext } from "./request-context";
 export { 
-  RequestContext, 
   createRequestContext, 
   requestContextStorage,
   contextStorage 
-} from './request-context';
+} from "./request-context";

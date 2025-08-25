@@ -1,9 +1,9 @@
 import { 
   createRequestContext, 
   requestContextStorage, 
-  contextStorage,
-  RequestContext 
+  contextStorage
 } from "../request-context";
+import type { RequestContext } from "../request-context";
 
 describe("RequestContext", () => {
   describe("createRequestContext", () => {
@@ -80,7 +80,7 @@ describe("RequestContext", () => {
         requestContextStorage.updateContext({
           userId: "user-123",
           tenantId: "tenant-456",
-          token: "jwt-token"
+          token: "jwt-token",
         });
         
         const updatedContext = requestContextStorage.getContext();
@@ -90,14 +90,18 @@ describe("RequestContext", () => {
         expect(updatedContext?.token).toBe("jwt-token");
         expect(updatedContext?.requestId).toBe(originalContext?.requestId);
         expect(updatedContext?.startedAt).toBe(originalContext?.startedAt);
-        expect(updatedContext?.startedAtTimestamp).toBe(originalContext?.startedAtTimestamp);
+        expect(updatedContext?.startedAtTimestamp).toBe(
+          originalContext?.startedAtTimestamp
+        );
       });
     });
 
     it("should throw error when accessing context outside of runWithContext", () => {
       expect(() => {
         requestContextStorage.getContextOrThrow();
-      }).toThrow("Request context not found. This usually means the context middleware was not properly applied.");
+      }).toThrow(
+        "Request context not found. This usually means the context middleware was not properly applied."
+      );
     });
 
     it("should throw error when updating context outside of runWithContext", () => {
@@ -127,7 +131,7 @@ describe("RequestContext", () => {
       const context: RequestContext = {
         requestId: "test-id",
         startedAt: "2023-01-01T00:00:00.000Z",
-        startedAtTimestamp: 1672531200000
+        startedAtTimestamp: 1672531200000,
       };
       
       expect(context).toBeDefined();
@@ -140,7 +144,7 @@ describe("RequestContext", () => {
         tenantId: "tenant-456",
         startedAt: "2023-01-01T00:00:00.000Z",
         startedAtTimestamp: 1672531200000,
-        token: "jwt-token"
+        token: "jwt-token",
       };
       
       expect(context).toBeDefined();
