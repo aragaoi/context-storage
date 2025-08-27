@@ -24,6 +24,9 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true
   },
+  "ts-node": {
+    "esm": true
+  },
   "include": [
     "src/**/*"
   ],

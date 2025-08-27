@@ -3,27 +3,41 @@ import { ContextStorage } from "./context-storage";
 
 export type UUID = string;
 
-export type RequestContext = {
+export type BaseRequestContext = {
   requestId: UUID;
-  userId?: string;
-  tenantId?: string;
   startedAt: string;
   startedAtTimestamp: number;
-  token?: string;
 };
 
-export const createRequestContext = (): RequestContext => {
+export type RequestContext<T = {}> = BaseRequestContext & T;
+
+export const createRequestContext = <T = {}>(
+  additionalFields?: T
+): RequestContext<T> => {
   const now = new Date();
-  return {
+  const baseContext = {
     requestId: randomUUID(),
     startedAtTimestamp: now.getTime(),
     startedAt: now.toISOString(),
   };
+
+  if (additionalFields) {
+    return { ...baseContext, ...additionalFields };
+  }
+
+  return baseContext as RequestContext<T>;
 };
 
-export const requestContextStorage = new ContextStorage<RequestContext>(
-  createRequestContext,
-  'Request context'
-);
-
-export const contextStorage = requestContextStorage;
+export class RequestContextStorage<T = {}> extends ContextStorage<RequestContext<T>> {
+  constructor(
+    name?: string,
+    customContextFactory?: (
+      initialContext?: RequestContext<T>
+    ) => RequestContext<T>
+  ) {
+    super(
+      customContextFactory || createRequestContext,
+      name || "Request context"
+    );
+  }
+}

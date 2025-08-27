@@ -1,8 +1,7 @@
 import {
   ContextStorage,
   createRequestContext,
-  requestContextStorage,
-  contextStorage,
+  RequestContextStorage,
 } from "../index";
 
 describe("Index exports", () => {
@@ -16,12 +15,9 @@ describe("Index exports", () => {
     expect(typeof createRequestContext).toBe("function");
   });
 
-  it("should export requestContextStorage instance", () => {
-    expect(requestContextStorage).toBeDefined();
-  });
-
-  it("should export contextStorage alias", () => {
-    expect(contextStorage).toBeDefined();
+  it("should export RequestContextStorage class", () => {
+    expect(RequestContextStorage).toBeDefined();
+    expect(typeof RequestContextStorage).toBe("function");
   });
 
   it("should allow creating ContextStorage instance from export", () => {
@@ -37,9 +33,10 @@ describe("Index exports", () => {
     expect(context).toHaveProperty("startedAtTimestamp");
   });
 
-  it("should allow using requestContextStorage from export", () => {
-    requestContextStorage.runWithContext(() => {
-      const context = requestContextStorage.getContext();
+  it("should allow using RequestContextStorage from export", () => {
+    const storage = new RequestContextStorage();
+    storage.runWithContext(() => {
+      const context = storage.getContext();
       expect(context).toHaveProperty("requestId");
     });
   });

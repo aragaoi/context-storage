@@ -2,16 +2,22 @@ import {AsyncLocalStorage} from 'node:async_hooks';
 
 export class ContextStorage<TContext> {
   private asyncLocalStorage = new AsyncLocalStorage<TContext>();
-  private contextFactory: () => TContext;
+  private contextFactory: (initialContext?: TContext) => TContext;
   private contextName: string;
 
-  constructor(contextFactory: () => TContext, contextName: string = 'ContextStorage') {
+  constructor(
+    contextFactory: (initialContext?: TContext) => TContext,
+    contextName: string = "ContextStorage"
+  ) {
     this.contextFactory = contextFactory;
     this.contextName = contextName;
   }
 
-  runWithContext<T>(callback: () => T): T {
-    return this.asyncLocalStorage.run(this.contextFactory(), callback);
+  runWithContext<T>(callback: () => T): T;
+  runWithContext<T>(callback: () => T, initialContext: TContext): T;
+  runWithContext<T>(callback: () => T, initialContext?: TContext): T {
+    const context = initialContext ?? this.contextFactory();
+    return this.asyncLocalStorage.run(context, callback);
   }
 
   getContext(): TContext | null {
