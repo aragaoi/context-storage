@@ -20,6 +20,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
 
     - name: Use Node.js
       uses: actions/setup-node@v4
@@ -63,3 +64,32 @@ jobs:
       run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - name: Compute previous tag and release body
+      id: compute_release_notes
+      run: |
+        git fetch --tags --force
+        NEW_VER="v${{ steps.get_version.outputs.new_version }}"
+        PREV_TAG="$(git tag --list 'v*' --sort=-version:refname | grep -v "^$NEW_VER$" | head -n1)"
+        if [ -n "$PREV_TAG" ]; then
+          BODY="Changes: https://github.com/${GITHUB_REPOSITORY}/compare/${PREV_TAG}...${NEW_VER}"
+        else
+          BODY="Initial release ${NEW_VER}"
+        fi
+        echo "previous_tag=$PREV_TAG" >> $GITHUB_OUTPUT
+        {
+          echo 'body<<EOF'
+          echo "$BODY"
+          echo 'EOF'
+        } >> $GITHUB_OUTPUT
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ steps.get_version.outputs.new_version }}
+        release_name: v${{ steps.get_version.outputs.new_version }}
+        body: ${{ steps.compute_release_notes.outputs.body }}
+        draft: false
+        prerelease: false
